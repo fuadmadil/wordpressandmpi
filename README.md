@@ -1,190 +1,32 @@
-# Panduan Pemasangan Apache2 dan Wordpress di Ubuntu Server 22.04
-## Panduan Pemasangan Apache2
-### 1. Masuk ke Ubuntu Server
-### 2. Perbarui dan Tingkatkan Paket
-```sh
-sudo apt update && sudo apt upgrade
-```
-### 3. Instal Apache2
-```sh
-sudo apt install apache2
-```
-### 4. Periksa Aplikasi yang Telah Terinstal
-```sh
-sudo ufw app list
-```
-### 5. Cek Status Apache2
-```sh
-sudo systemctl status apache2
-```
-### 6. Tampilkan Apache2 di Browser
-Gunakan perintah `ip a` untuk melihat alamat IP, salin alamat tersebut ke browser untuk melihat Apache2.
-![Apache](https://github.com/feliana444/Apache2-UbuntuServer/assets/145323449/b9a9c673-a095-4fd2-81d3-a770540cdec8)
-### 7. Membuat Web
-#### 7.1 Pindah ke direktori /var/www/html
-```sh
-cd /var/www/html
-```
-#### 7.2 Buat Direktori
-```sh
-mkdir <nama direktori>
-```
-#### 7.3 Pindah ke root
-```sh
-sudo su
-```
-#### 7.4 Pindah ke direktori yang sudah dibuat
-```sh
-cd <nama direktori>
-```
-#### 7.5 Edit direktori
-```sh
-nano index.html
-```
-#### 7.6 Contoh program
-```html
-<html>
-<head>
-<title> website eyn </title>
-</head>
-<h1>
-<body> Selamat Datang di Website Ini </body>
-</h1>
-<p>Nama : Feliana Yunita
-<p>NIM : 09011282227039
-<p>Kelas : SK5C
-<p>Prodi : Sistem Komputer
-</html>
-```
-#### 7.7 Output 
-`ip a/<nama direktori>`
-![web](https://github.com/feliana444/Apache2-UbuntuServer/assets/145323449/db657a74-fdd5-4d84-973f-0b606ef9d210)
-## Panduan Remote
-### 1. CMD
-```sh
-ssh <nama server>@ip a
-```
-![CMD](https://github.com/feliana444/Apache2-UbuntuServer/assets/145323449/a99239f9-a75c-4bab-a6aa-7a8644d9a607)
-### 2. PuTTY
-1. Masukkan alamat IP pada PuTTY
-2. Klik open
-3. Connect once
-![PuTTY](https://github.com/feliana444/Apache2-UbuntuServer/assets/145323449/3c003998-7aaf-45b0-8646-a40667e0ac76)
-### 3. Ubuntu Dekstop
-```sh
-ssh <nama server>@ip a
-```
-![image](https://github.com/feliana444/Apache2-UbuntuServer/assets/145323449/063b1a83-dc9f-44ff-a83c-c8b047524a19)
+Cara Install Apache
+1.	Login ke Ubuntu Server
+ ![image](https://github.com/fuadmadil/wordpressandmpi/assets/150570456/aa40d761-6dfe-411d-8ccc-9614c7d360ac)
 
-# Panduan Pemasangan Wordpress
-Pastikan Apache2 sudah terinstal pada Ubuntu Server yang digunakan
-## 1. Pindah ke root
-```sh
-sudo su
-```
-## 2. Instal MySql
-### 2.1 Instal MySQL
-```sh
-apt install mariadb-server mariadb-client
-```
-### 2.2 Amankan basis data MariaDB dan larang login root jarak jauh
-```sh
-mysql_secure_installation
-```
-## 3. Instal PHP
-### 3.1 Instal
-```sh
-apt install php php-mysql
-```
-### 3.2 Konfirmasi Instalasi PHP, buat file info.php di `/var/www/html/`
-```sh
-nano /var/www/html/info.php
-```
-Tambahkan baris berikut
-```sh
-<?php
-phpinfo();
-?>
-```
-### 3.4 Buka browser `ip/info.php`
-![image](https://github.com/feliana444/Apache2-dan-Wordpress-UbuntuServer/assets/145323449/bf1726cd-60b3-4138-a9b6-9ce82c430bcd)
-### 3.5 Instal Komponen PHP & Apache
-```sh
-sudo apt install php libapache2-mod-php php-mysql
-```
-## 4. Membuat Database Wordpress
-### 4.1 Masuk ke database MariaDB
-```sh
-mysql -u root -p
-```
-### 4.2 Ketikkan perintah ini satu per satu
-```sh
-CREATE DATABASE wordpress_db;
-```
-```sh
-CREATE USER 'wp_user'@'localhost' IDENTIFIED BY 'password';
-```
-```sh
-GRANT ALL ON wordpress_db.* TO 'wp_user'@'localhost' IDENTIFIED BY 'password';
-```
-```sh
-FLUSH PRIVILEGES;
-```
-```sh
-Exit;
-```
-## 5. Instal Wordpress CMS
-### 5.1 Instal
-```sh
-cd /tmp && wget https://wordpress.org/latest.tar.gz
-```
-```sh
-tar -xvf latest.tar.gz
-```
-### 5.2 Salin ke direktori html
-```sh
-cp -R wordpress /var/www/html/
-```
-```sh
-chown -R www-data:www-data /var/www/html/wordpress/
-```
-```sh
-chmod -R 755 /var/www/html/wordpress/
-```
-```sh
-mkdir /var/www/html/wordpress/wp-content/uploads
-```
-```sh
-chown -R www-data:www-data /var/www/html/wordpress/wp-content/uploads/
-```
-### 5.4 Buka browser
-`ip/wordpress`
-Isi formulir seperti saat membuat database WordPress di database MariaDB
-![image](https://github.com/feliana444/Apache2-dan-Wordpress-UbuntuServer/assets/145323449/db000734-c0ce-42a5-a2ac-38c3630dd408)
-Klik *run the installation* <br>
-Isi detail tambahan seperti judul situs, Nama Pengguna, dan Kata Sandi lalu klik *install wordpress* untuk login ke akun WordPress yang sudah dibuat
-### 5.5 Jika sudah selesai, akan muncul tampilan seperti ini
-![image](https://github.com/feliana444/Apache2-dan-Wordpress-UbuntuServer/assets/145323449/52d0a77d-d23a-4418-a628-d28e24148041)
-![image](https://github.com/feliana444/Apache2-dan-Wordpress-UbuntuServer/assets/145323449/60959b01-75bf-4fb0-a069-45aa67687da2)
-## 6. Edit File Wordpress
-Ag
+2.	Install Apache dengan Sudo Apt Install apache2
+ ![image](https://github.com/fuadmadil/wordpressandmpi/assets/150570456/aea81367-585d-4cc0-b722-5f9e6f7946cf)
 
-ar Wordpress tetap dapat diakses melalui alamat IP yang berbeda, ubah konfigurasi file Wordpress
-```sh
-cd /var/www/html/wordpress
-```
-```sh
-nano wp-config.php
-```
-Salin teks di bawah *db_collate*
-```sh
-$ip = exec('ip addr show enp0s3 | grep "inet\b" | awk \'{print $2}\' | cut -d/ -f1');
-if (!empty($ip)) {
-  define('WP_HOME', 'http://' . $ip . '/wordpress');
-  define('WP_SITEURL', 'http://' . $ip . '/wordpress');
-}
-```
-Kemudian, jalankan perintah
-```sh
-php wp-config.ph
-```
+*diatas jika sudah terinstall apache
+3.	Jika sudah terinstall pastikan sudah terpasang di Ubuntu
+menggunakan sudo ufw app list
+ ![image](https://github.com/fuadmadil/wordpressandmpi/assets/150570456/d33f5d7e-9650-44a7-990a-38f0bc797159)
+
+4.	Gunakan ip a untuk melihat IP addres yang berjalan sekarang
+ ![image](https://github.com/fuadmadil/wordpressandmpi/assets/150570456/4da8d909-f910-478d-b9f0-d118521dd3e8)
+
+5.	Gunakan IP utama untuk login ke server apache, masukkan IP ke browser (192.168.0.98)
+ ![image](https://github.com/fuadmadil/wordpressandmpi/assets/150570456/a0224e88-7fed-4c94-beb3-536225262492)
+
+6.	Remote Ke CMD dengan “ssh fuad@192.168.0.9”
+ ![image](https://github.com/fuadmadil/wordpressandmpi/assets/150570456/e2919c25-32af-46e6-977b-b6eabed4c377)
+
+7.	Remote Ke PuTTY Config dengan IP Utama
+ ![image](https://github.com/fuadmadil/wordpressandmpi/assets/150570456/d442fb3b-f963-4d67-9218-6ee87b9b0270)
+
+8.	Login kembali dengan username dan password
+![image](https://github.com/fuadmadil/wordpressandmpi/assets/150570456/3a4ce821-d50f-4ba9-bc7d-f740b209d8ce)
+
+
+9.	 Login ke ubuntu Desktop masih dengan cara yang sama seperti PuTTY dan CMD
+   ![image](https://github.com/fuadmadil/wordpressandmpi/assets/150570456/6c7686cb-0197-4ea0-aa5c-d13115f9402c)
+
+ 
