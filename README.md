@@ -1,8 +1,9 @@
 Cara Install Apache
 1.	Login ke Ubuntu Server
+   
  ![image](https://github.com/fuadmadil/wordpressandmpi/assets/150570456/aa40d761-6dfe-411d-8ccc-9614c7d360ac)
 
-2.	Install Apache dengan Sudo Apt Install apache2
+3.	Install Apache dengan Sudo Apt Install apache2
  ![image](https://github.com/fuadmadil/wordpressandmpi/assets/150570456/aea81367-585d-4cc0-b722-5f9e6f7946cf)
 
 *diatas jika sudah terinstall apache
